@@ -2,11 +2,11 @@ public class HelloWorld{
 
     public static void main(String []args){
         //alphabet for ciphering
-        String lowerCase = "abcdefghijklmnopqrstuvwxyz ,.?():;";
-        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?():;";
+        String lowerCase = "abcdefghijklmnopqrstuvwxyz ,.?'():;0123456789";
+        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?'():;0123456789";
         
         //Strings for key and message
-        String keyText = "BIGmike";
+        String keyText = "BIG-mike";
         String messageText = "Bailey, I like you :) ";
         String fixedKey = "";
         
@@ -31,12 +31,14 @@ public class HelloWorld{
         }
         
         //change to all caps, and find invalid characters
-        for( int i = 0; i < fixedKey.length(); i++ ){
+        boolean noInvalid = true;
+        for( int i = 0; i < keyText.length(); i++ ){
             if( lowerCase.indexOf(key[i]) >= 0 ){
                 key[i] = upperCase.substring(lowerCase.indexOf(key[i]), lowerCase.indexOf(key[i]) + 1);
             }else
             if( lowerCase.indexOf(key[i]) < 0 && upperCase.indexOf(key[i]) < 0 ){
-                System.out.println( "Key contains " + "\"" + key[i] + "\"" + ", an invalid characer!" + "\nPlease stick to \"A-Z\", \" \"(space), \",\", \".\", and \"?\"\n" );
+                System.out.println( "Key contains " + "\"" + key[i] + "\"" + ", an invalid characer!" + "\nPlease stick to \"A-Z\", \" \"(space), and \"" + upperCase.substring(27) + "\"\n" );
+                noInvalid = false;
             }
         }
         for( int i = 0; i < messageText.length(); i++ ){
@@ -44,24 +46,27 @@ public class HelloWorld{
                 message[i] = upperCase.substring(lowerCase.indexOf(message[i]), lowerCase.indexOf(message[i]) + 1);
             }else
             if( lowerCase.indexOf(message[i]) < 0 && upperCase.indexOf(message[i]) < 0 ){
-                System.out.println( "Message contains " + "\"" + message[i] + "\"" + ", an invalid characer!" + "\nPlease stick to \"A-Z\", \" \"(space), \",\", \".\", and \"?\"\n" );
+                System.out.println( "Message contains " + "\"" + message[i] + "\"" + ", an invalid characer!" + "\nPlease stick to \"A-Z\", \" \"(space), and \"" + upperCase.substring(27) + "\"\n" );
+                noInvalid = false;
             }
         }
         
         
         //Cipher!!!
-        String crypticMessage = "";
-        for( int i = 0; i < fixedKey.length(); i++ ){
-            if( upperCase.indexOf(message[i]) > upperCase.indexOf(key[i]) ){
-                int position = upperCase.length() - (upperCase.indexOf(message[i]) - upperCase.indexOf(key[i]));
-                crypticMessage += upperCase.substring( position, position + 1 );
-            }else
-            if( upperCase.indexOf(message[i]) <= upperCase.indexOf(key[i]) ){
-                int position = upperCase.indexOf(key[i]) - upperCase.indexOf(message[i]);
-                crypticMessage += upperCase.substring( position, position + 1 );
+        if( noInvalid ){
+            String crypticMessage = "";
+            for( int i = 0; i < fixedKey.length(); i++ ){
+                if( upperCase.indexOf(message[i]) > upperCase.indexOf(key[i]) ){
+                    int position = upperCase.length() - (upperCase.indexOf(message[i]) - upperCase.indexOf(key[i]));
+                    crypticMessage += upperCase.substring( position, position + 1 );
+                }else
+                if( upperCase.indexOf(message[i]) <= upperCase.indexOf(key[i]) ){
+                    int position = upperCase.indexOf(key[i]) - upperCase.indexOf(message[i]);
+                    crypticMessage += upperCase.substring( position, position + 1 );
+                }
             }
+            
+            System.out.println( "\n\n\n\n" + crypticMessage + "\n\n\n\n" );
         }
-        
-        System.out.println( "\n\n\n\n" + crypticMessage + "\n\n\n\n" );
     }
 }
