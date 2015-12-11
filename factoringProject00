@@ -1,0 +1,53 @@
+public class Factorable
+{
+  private int myA;
+  private int myB;
+  private int myC;
+  
+  public Factorable( int a, int b, int c )
+  {
+    myA = a;
+    myB = b;
+    myC = c;
+  }
+  
+  public String check()
+  {
+    int[] myArray = { myA, myB, myC };
+    int m = myArray[0];
+    for ( int i = 1; i < myArray.length; i++ )
+    {
+      if ( myArray[i] < m )
+        m = myArray[i];
+    }
+    boolean factor = false;
+    for ( int i = 2; i <= m; i++ )
+    {
+      if (( myA % i == 0 ) && ( myB % i == 0 ) && ( myC % i == 0 ))
+        factor = true;
+    }
+    if (factor)
+      return ( "Yes, this is factorable!" );
+    else
+      return ( "No, this is not factorable" );
+  }
+  
+  public String check2()
+  {
+    boolean factorable = false;
+    for ( int i = 1; i <= Math.abs( myA * myC ); i++ )
+    {
+      if ((( myA * myC ) / i ) + i == myB )
+        factorable = true;
+    }
+    if ( factorable )
+      return ( "Yes, this is factorable!" );
+    else
+      return ( "No, this is not factorable" );
+  }
+}
+
+public static void main(String []args){
+  Factorable test = new Factorable( 2, 5, -12 );
+  System.out.println( test.check2() );
+}
