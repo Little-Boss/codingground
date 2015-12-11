@@ -2,12 +2,12 @@ public class HelloWorld{
 
     public static void main(String []args){
         //alphabet for ciphering
-        String lowerCase = "abcdefghijklmnopqrstuvwxyz ,.?'():;0123456789";
-        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?'():;0123456789";
+        String lowerCase = "abcdefghijklmnopqrstuvwxyz ,.?!'():;0123456789";
+        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?!'():;0123456789";
         
         //Strings for key and message
-        String keyText = "BIG-mike";
-        String messageText = "Bailey, I like you :) ";
+        String keyText = "BIGmike";
+        String messageText = "AI8BE(XVA :'Y5V!2ZP";
         String fixedKey = "";
         
         //make key as long as message
