@@ -1,0 +1,41 @@
+public class Item{
+  private String myName;
+  private double myPrice, myAmountBought, myAmountUsed;
+
+  public Item( String name, double price, double amountBought, double amountUsed ){
+    myName = name;
+    myPrice = price;
+    myAmountBought = amountBought;
+    myAmountUsed = amountUsed;
+  }
+  
+  public double expence(){
+    return myPrice * (myAmountUsed / myAmountBought);
+  }
+}
+public class EvaluateItems{
+  private Item[] myItems;
+  
+  EvaluateItems( Item[] items ){
+    myItems = items;
+  }
+  
+  public String productCost(){
+    double total = 0;
+    for( int i = 0; i < myItems.length; i++ ){
+      total += myItems[i].expence();
+    }
+    return "Product cost is $" + total;
+  }
+}
+public class MainClass{
+  public static void main(String []args){
+    double eggPrice = 6;
+    double sugarPrice = 12;
+    
+    Item[] allItems = { new Item( "eggs", eggPrice, 12, 2 ), 
+                       new Item( "sugar", sugarPrice, 10, .5 )};
+    EvaluateItems result = new EvaluateItems(allItems);
+    System.out.println( result.productCost() );
+  }
+}
