@@ -28,10 +28,17 @@ public class EvaluateItems{
     return "Product cost is $" + total;
   }
 }
+
+
+
 public class MainClass{
   public static void main(String []args){
+    //egg
     double eggPrice = 6;
+    
+    //sugar
     double sugarPrice = 12;
+    
     
     Item[] allItems = { new Item( "eggs", eggPrice, 12, 2 ), 
                        new Item( "sugar", sugarPrice, 10, .5 )};
