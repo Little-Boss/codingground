@@ -19,9 +19,9 @@ public class Main{
         //Strings for key and message
         System.out.println("This program is not case-sensetive\nThe message length and key length don't have to match\n");
         System.out.println("One key can either encipher or, if the same key was used to encipher, decipher a message");
-        System.out.println("Please enter your key");
+        System.out.print("Please enter your key: ");
         String keyText = scanner.next().toUpperCase();
-        String messageText = "HELLO, MISTER".toUpperCase();
+        String messageText = scanner.next().toUpperCase();
         String fixedKey = "";
         
         //make key as long as message
@@ -43,6 +43,7 @@ public class Main{
         for( int i = 0; i < messageText.length(); i++ ){
             message[i] = messageText.substring(i, i + 1);
         }
+        
         
         //check for invalid characters
         boolean noInvalid = true;
@@ -79,7 +80,7 @@ public class Main{
         		}
         	}
         }
-        System.out.print("\n");
+        System.out.println();
         for(String index : key)
         {
         	System.out.print(upperCase.indexOf(index) + " ");
@@ -104,6 +105,7 @@ public class Main{
         	System.out.print(upperCase.indexOf(index) + " ");
         }
         System.out.println();
+        
         
         //change to all caps, and find invalid characters
         /*boolean noInvalid = true;
