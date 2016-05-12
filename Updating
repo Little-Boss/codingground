@@ -1,25 +1,25 @@
 /* package whatever; // don't place package name! */
-
+ 
 import java.util.*;
 import java.util.Scanner;
 import java.lang.*;
 import java.io.*;
-
+ 
 /* Name of the class has to be "Main" only if the class is public. */
 public class Main{
-
+ 
     public static void main(String []args){
         //alphabet for ciphering
         //String lowerCase = "abcdefghijklmnopqrstuvwxyz ,.?!'():;0123456789";
         String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?!'():;0123456789";
-        
+ 
         Scanner scanner = new Scanner(System.in);
-        
+ 
         //Strings for key and message
         String keyText = scanner.next().toUpperCase();
-        String messageText = "Hello, Mister".toUpperCase();
+        String messageText = "4E5B4?Y;A:3E3".toUpperCase();
         String fixedKey = "";
-        
+ 
         //make key as long as message
         if( messageText.length() < keyText.length() ){
             fixedKey = keyText.substring(0, messageText.length());
@@ -29,7 +29,7 @@ public class Main{
             }
             fixedKey += fixedKey.substring(0, messageText.length() - fixedKey.length());
         }
-        
+ 
         //change to array
         String[] key = new String[fixedKey.length()];
         for( int i = 0; i < fixedKey.length(); i++ ){
@@ -39,7 +39,9 @@ public class Main{
         for( int i = 0; i < messageText.length(); i++ ){
             message[i] = messageText.substring(i, i + 1);
         }
-        
+ 
+ 
+        //returing Strings to check
         System.out.println("Key: ");
         for(String letter : key)
         {
@@ -54,7 +56,7 @@ public class Main{
         {
         	System.out.print(upperCase.indexOf(index) + " ");
         }
-        
+ 
         System.out.println("\nMessage: ");
         for(String letter : message)
         {
@@ -69,7 +71,7 @@ public class Main{
         {
         	System.out.print(upperCase.indexOf(index) + " ");
         }
-        
+ 
         //change to all caps, and find invalid characters
         /*boolean noInvalid = true;
         for( int i = 0; i < keyText.length(); i++ ){
@@ -92,7 +94,7 @@ public class Main{
             }
         }
         */
-        
+ 
         //Cipher!!!
         //if( noInvalid ){
             String crypticMessage = "";
@@ -106,8 +108,8 @@ public class Main{
                     crypticMessage += upperCase.substring( position, position + 1 );
                 }
             }
-            
-            System.out.println( "\n\n\n\n" + crypticMessage + "\n\n\n\n" );
+            System.out.println();
+            System.out.println( /* "\n\n\n\n" + */ crypticMessage + "\n\n\n\n" );
         //}
     }
 }
