@@ -14,13 +14,15 @@ class Cipher
 	
 	public Cipher( String keyText, String messageText )
 	{
-		
+		//stores inputs in original form
 		myKeyText = keyText;
 		myMessageText = messageText;
 		
+		//Changes inputs to upper case
 		keyText = keyText.toUpperCase();
 		messageText = messageText.toUpperCase();
 		
+		//initalizes arrays of key and message to desired length
 		myKey = new String[messageText.length()];
 		myMessage = new String[messageText.length()];
 		
@@ -49,7 +51,7 @@ class Cipher
 		return "Key: " + myKeyText + "\nMessage: " + myMessageText;
 	}
 	
-	//returns the arrays of key and message
+	//returns the arrays of key and message as a string
 	public String getArrays()
 	{
 		String result = "Key:\n";
@@ -67,6 +69,7 @@ class Cipher
 		return result;
 	}
 	
+	//this is the ciphering method
 	public String processMessage()
 	{
 		String crypticMessage = "";
@@ -92,9 +95,47 @@ public class Main
 {
 	public static void main (String[] args) throws java.lang.Exception
 	{
-		Cipher test = new Cipher( "Baike", "^`)(9)`0(0``HK(#(001Y" );
-		System.out.println( test.getArrays() );
-		System.out.println( "\n" + test.getText() );
-		System.out.println( "\n" + test.processMessage() );
+		Scanner scanner = new Scanner(System.in);
+		String key = "";
+		String message = "";
+		String name = "";
+		String fixedName = "";
+		String yesOrNo = "";
+		
+		System.out.println( "Today you will be using a cipher (this program is not cap-sensitive)\nA key is used to encode or decode a message\nYour ciphered message can be entered with the same key to output the original\n" );
+		System.out.println( "What's your name?" );
+		name = scanner.next();
+		if( name.length() > 0 )
+		{
+			name = name.substring(0,1).toUpperCase() + name.substring(1);
+			
+			for( int i = 0; i < name.length(); i++ )
+			{
+				if( name.substring(i, i + 1).equals(" ") )
+				{
+					fixedName += name.substring(i, i + 2).toUpperCase();
+					i++;
+				}else
+				{
+					fixedName += name.substring(i, i + 1);
+				}
+			}
+		}
+		System.out.println( "\nHello, " + fixedName + "! Would you like your name to be your key? (Yes or No)" );
+		yesOrNo = scanner.next();
+		if( yesOrNo.toUpperCase().equals("YES") )
+		{
+			key = name;
+		}else
+		{
+			System.out.print( "\nPlease enter your key\nKey: " );
+			key = scanner.next();
+		}
+		System.out.print( "\nPlease enter your message\nMessage: " );
+		message = scanner.next();
+		Cipher wammo = new Cipher( key, message );
+		//System.out.println( wammo.getArrays() );
+		//System.out.println( wammo.getText() );
+		System.out.println( "\n" + wammo.processMessage() );
 	}
 }
