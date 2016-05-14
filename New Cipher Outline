@@ -95,6 +95,8 @@ public class Main
 {
 	public static void main (String[] args) throws java.lang.Exception
 	{
+		//initializes my thingy things
+		String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.<>?'\":;`1234567890-=~!@#$%^&*()_+";
 		Scanner scanner = new Scanner(System.in);
 		String key = "";
 		String message = "";
@@ -102,14 +104,18 @@ public class Main
 		String fixedName = "";
 		String yesOrNo = "";
 		
-		System.out.println( "Today you will be using a cipher (this program is not cap-sensitive)\nA key is used to encode or decode a message\nYour ciphered message can be entered with the same key to output the original\n" );
-		System.out.println( "What's your name?" );
-		name = scanner.next();
+		//introduction
+		System.out.println( "Today you will be using a cipher (this program is not cap-sensitive)\nA key is used to encode or decode a message\nYour ciphered message can be entered with the same key to output the original" );
+		System.out.println( "P.S. You have so many character to choose from, so please don't get unreasonable on me!" );
+		System.out.println( "\nWhat's your name?" );
+		name = "miChAEl the awEsoMe";
+		
+		//fixes capitalization ("miChAEl the awEsoMe" evaluates to "Michael The Awesome")
 		if( name.length() > 0 )
 		{
 			name = name.substring(0,1).toUpperCase() + name.substring(1);
-			
-			for( int i = 0; i < name.length(); i++ )
+			fixedName += name.substring(0,1);
+			for( int i = 1; i < name.length(); i++ )
 			{
 				if( name.substring(i, i + 1).equals(" ") )
 				{
@@ -117,25 +123,67 @@ public class Main
 					i++;
 				}else
 				{
-					fixedName += name.substring(i, i + 1);
+					fixedName += name.substring(i, i + 1).toLowerCase();
 				}
 			}
 		}
+		
 		System.out.println( "\nHello, " + fixedName + "! Would you like your name to be your key? (Yes or No)" );
-		yesOrNo = scanner.next();
+		yesOrNo = "no";
+		
+		//sets key
 		if( yesOrNo.toUpperCase().equals("YES") )
 		{
 			key = name;
 		}else
 		{
 			System.out.print( "\nPlease enter your key\nKey: " );
-			key = scanner.next();
+			key = "BIGmike";
 		}
+		
+		key = key.toUpperCase();
+		String keyInvalids = "";
+		boolean keyHasError = false;
+		for( int i = 0; i < key.length(); i++ )
+		{
+			if( upperCase.indexOf(key.substring(i,i+1)) < 0 )
+			{
+				keyInvalids += "\"" + key.substring(i,i+1) + "\", ";
+				keyHasError = true;
+			}
+		}
+		if( keyHasError )
+		{
+			System.out.println( keyInvalids + "\nPlease use only the following: " + upperCase );
+			key = "My bad, dude";
+		}
+			
+		//sets message
 		System.out.print( "\nPlease enter your message\nMessage: " );
-		message = scanner.next();
+		message = "It's getting kinda late";
+		
+		message = message.toUpperCase();
+		String messageInvalids = "";
+		boolean messageHasError = false;
+		for( int i = 0; i < message.length(); i++ )
+		{
+			if( upperCase.indexOf(message.substring(i,i+1)) < 0 )
+			{
+				messageInvalids += "\"" + message.substring(i,i+1) + "\", ";
+				messageHasError = true;
+			}
+		}
+		if( messageHasError )
+		{
+			System.out.println( messageInvalids + "\nPlease use only the following: " + upperCase );
+			message = "My bad, dude";
+		}
+		
+		
+		//initializes a Cipher class from user input
 		Cipher wammo = new Cipher( key, message );
 		//System.out.println( wammo.getArrays() );
 		//System.out.println( wammo.getText() );
-		System.out.println( "\n" + wammo.processMessage() );
+		System.out.println( "\n\nI present to you your ciphered message :D\n" + wammo.processMessage() );
 	}
 }
