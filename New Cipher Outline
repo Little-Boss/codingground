@@ -10,18 +10,81 @@ class Cipher
 {
 	private String myKeyText, myMessageText;
 	private String[] myKey, myMessage;
-	private String myUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.?'\":;`1234567890-=~!@#$%^&*()_+";
+	private String myUpperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ,.<>?'\":;`1234567890-=~!@#$%^&*()_+";
 	
 	public Cipher( String keyText, String messageText )
 	{
+		
 		myKeyText = keyText;
 		myMessageText = messageText;
 		
+		keyText = keyText.toUpperCase();
+		messageText = messageText.toUpperCase();
+		
+		myKey = new String[messageText.length()];
+		myMessage = new String[messageText.length()];
+		
+		//makes key an array of strings
+		int cycleKey = 0;
+		for( int i = 0; i < messageText.length(); i++ )
+		{
+			if( cycleKey == keyText.length() )
+			{
+				cycleKey = 0;
+			}
+			myKey[i] = keyText.substring( cycleKey, cycleKey + 1 );
+			cycleKey++;
+		}
+		
+		//makes message an array of strings
+		for( int i = 0; i < messageText.length(); i++ )
+		{
+			myMessage[i] = messageText.substring( i, i + 1 );
+		}
 	}
 	
+	//returns the key and message entered
 	public String getText()
 	{
 		return "Key: " + myKeyText + "\nMessage: " + myMessageText;
+	}
+	
+	//returns the arrays of key and message
+	public String getArrays()
+	{
+		String result = "Key:\n";
+		for( String letter : myKey )
+		{
+			result += letter + " ";
+		}
+		
+		result += "\nMessage:\n";
+		for( String letter : myMessage )
+		{
+			result += letter + " ";
+		}
+		
+		return result;
+	}
+	
+	public String processMessage()
+	{
+		String crypticMessage = "";
+        for( int i = 0; i < myMessage.length; i++ )
+        {
+            if( myUpperCase.indexOf(myMessage[i]) > myUpperCase.indexOf(myKey[i]) )
+            {
+                int position = myUpperCase.length() - (myUpperCase.indexOf(myMessage[i]) - myUpperCase.indexOf(myKey[i]) );
+                crypticMessage += myUpperCase.substring( position, position + 1 );
+            }else
+            if( myUpperCase.indexOf(myMessage[i]) <= myUpperCase.indexOf(myKey[i]) )
+            {
+                int position = myUpperCase.indexOf(myKey[i]) - myUpperCase.indexOf(myMessage[i]);
+                crypticMessage += myUpperCase.substring( position, position + 1 );
+            }
+        }
+        
+        return crypticMessage;
 	}
 }
 
@@ -29,7 +92,9 @@ public class Main
 {
 	public static void main (String[] args) throws java.lang.Exception
 	{
-		Cipher test = new Cipher( "Baike", "Hello, Bailey" );
-		System.out.println(test.getText());
+		Cipher test = new Cipher( "Baike", "^`)(9)`0(0``HK(#(001Y" );
+		System.out.println( test.getArrays() );
+		System.out.println( "\n" + test.getText() );
+		System.out.println( "\n" + test.processMessage() );
 	}
 }
