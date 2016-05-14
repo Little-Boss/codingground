@@ -27,6 +27,7 @@ class Cipher
 		myMessage = new String[messageText.length()];
 		
 		//makes key an array of strings
+		//plans for future: imploment caesar cipher at each itteration of the key (key = ABC -> BCD -> CDE -> etc.)
 		int cycleKey = 0;
 		for( int i = 0; i < messageText.length(); i++ )
 		{
@@ -196,6 +197,8 @@ public class Main
 			//System.out.println( wammo.getArrays() );
 			//System.out.println( wammo.getText() );
 			System.out.println( "\n\nI present to you your ciphered message :D\n" + wammo.processMessage() );
+			
+			//again?
 			System.out.println( "\nWould you like to go again?" );
 			yesOrNo = scanner.next();
 			if( yesOrNo.toUpperCase().equals("YES") )
